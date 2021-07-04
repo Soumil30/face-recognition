@@ -1,0 +1,5 @@
+.idea
+venv
+data
+notebooks
+__pycache__

@@ -1,8 +1,8 @@
 import tkinter as tk
 from dotenv import load_dotenv
 
-from src.db import Employee
-from src.capture_images import capture_images
+from src.database.db import Employee
+from src.features.capture_images import capture_images
 
 root = tk.Tk()
 

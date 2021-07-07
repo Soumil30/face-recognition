@@ -8,17 +8,17 @@ from keras.models import load_model
 from mtcnn import MTCNN
 from sklearn.preprocessing import Normalizer
 
-from src.face_detection import extract_face
-from src.face_embedding import create_embeddings
-from src.tk_face import unrecognized_face, recognized_face, undetected_face
+from src.features.face_detection import extract_face
+from src.features.face_embedding import create_embeddings
+from src.ui.employee_recognition import unrecognized_face, recognized_face, undetected_face
 
 load_dotenv()
 
 face_detector = MTCNN()
 embedding_model = load_model('../models/facenet_keras.h5')
-classification_model = load("../models/celebrity-classification-model.joblib")
+classification_model = load("../models/classification-model.joblib")
 in_encoder = Normalizer(norm='l2')
-out_encoder = load("../models/encoder.joblib")
+out_encoder = load("../data/intermediate/encoder.joblib")
 
 print("Loading complete")
 
@@ -31,11 +31,11 @@ while True:
     if cv2.waitKey(1) & 0xFF == ord('s'):
         image = Image.fromarray(frame, 'RGB')
         pixels = asarray(image)
-        cv2.imwrite("../data/emp.jpg", pixels)
+        cv2.imwrite("../data/raw/emp.jpg", pixels)
 
         faces = list()
 
-        extracted_face = extract_face("../data/emp.jpg", face_detector)
+        extracted_face = extract_face("../data/raw/emp.jpg", face_detector)
 
         if extracted_face is None:
             undetected_face()
@@ -66,7 +66,7 @@ while True:
         else:
             recognized_face(result_class_name)
 
-        os.remove("../data/emp.jpg")
+        os.remove("../data/raw/emp.jpg")
 
     if cv2.waitKey(1) & 0xFF == ord('q'):
         break

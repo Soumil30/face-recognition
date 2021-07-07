@@ -9,7 +9,7 @@ def capture_images(emp_id):
 
     count = 0
 
-    os.mkdir("../data/train-images/" + str(emp_id) + "/")
+    os.mkdir("../data/raw/" + str(emp_id) + "/")
 
     while count < 10:
         ret, frame = vid.read()
@@ -19,7 +19,7 @@ def capture_images(emp_id):
             image = Image.fromarray(frame, 'RGB')
             pixels = asarray(image)
             count = count + 1
-            cv2.imwrite("../data/train-images/" + str(emp_id) + "/" + str(count) + ".jpg", pixels)
+            cv2.imwrite("../data/raw/" + str(emp_id) + "/" + str(count) + ".jpg", pixels)
 
         if cv2.waitKey(10) & 0xFF == ord('q'):
             break

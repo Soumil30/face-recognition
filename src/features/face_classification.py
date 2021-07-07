@@ -10,12 +10,11 @@ def train_model(train_x, train_y):
 
     out_encoder = LabelEncoder()
     out_encoder.fit(train_y)
-    dump(out_encoder, '../models/encoder.joblib')
+    dump(out_encoder, '../../data/intermediate/encoder.joblib')
 
     train_y = out_encoder.transform(train_y)
 
     model = SVC(kernel='linear', probability=True)
-    # model = SGDClassifier()
 
     model.fit(train_x, train_y)
 

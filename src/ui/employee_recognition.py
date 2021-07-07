@@ -1,7 +1,7 @@
 from tkinter import *
 from tkinter import messagebox
 
-from src.db import Employee
+from src.database.db import Employee
 
 
 def unrecognized_face():

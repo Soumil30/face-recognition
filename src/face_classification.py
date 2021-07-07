@@ -1,3 +1,4 @@
+from joblib import dump
 from sklearn.preprocessing import LabelEncoder
 from sklearn.preprocessing import Normalizer
 from sklearn.svm import SVC
@@ -9,9 +10,12 @@ def train_model(train_x, train_y):
 
     out_encoder = LabelEncoder()
     out_encoder.fit(train_y)
+    dump(out_encoder, '../models/encoder.joblib')
+
     train_y = out_encoder.transform(train_y)
 
     model = SVC(kernel='linear', probability=True)
+    # model = SGDClassifier()
 
     model.fit(train_x, train_y)
 

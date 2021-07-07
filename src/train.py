@@ -5,7 +5,8 @@ from src.face_classification import train_model
 from src.face_detection import load_dataset
 from src.face_embedding import create_embeddings
 
-directory = "../data/train-images/"
+# directory = "../data/train-images/"
+directory = "../data/celebrity-dataset/train/"
 
 train_X, train_y = load_dataset(directory)
 print(train_X.shape, train_y.shape)
@@ -20,4 +21,4 @@ print(embedding_train_X.shape)
 
 classification_model = train_model(embedding_train_X, train_y)
 
-dump(classification_model, '../models/classification-model.joblib')
+dump(classification_model, '../models/celebrity-classification-model.joblib')

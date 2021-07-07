@@ -1,5 +1,7 @@
+import os
 import cv2
 from PIL import Image
+from dotenv import load_dotenv
 from numpy import asarray, expand_dims
 from joblib import load
 from keras.models import load_model
@@ -9,6 +11,8 @@ from sklearn.preprocessing import Normalizer
 from src.face_detection import extract_face
 from src.face_embedding import create_embeddings
 from src.tk_face import unrecognized_face, recognized_face, undetected_face
+
+load_dotenv()
 
 face_detector = MTCNN()
 embedding_model = load_model('../models/facenet_keras.h5')
@@ -61,6 +65,8 @@ while True:
 
         else:
             recognized_face(result_class_name)
+
+        os.remove("../data/emp.jpg")
 
     if cv2.waitKey(1) & 0xFF == ord('q'):
         break

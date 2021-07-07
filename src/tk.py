@@ -1,9 +1,12 @@
 import tkinter as tk
+from dotenv import load_dotenv
 
 from src.db import Employee
 from src.capture_images import capture_images
 
 root = tk.Tk()
+
+load_dotenv()
 
 emp_db = Employee()
 

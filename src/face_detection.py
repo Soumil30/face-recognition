@@ -1,3 +1,4 @@
+import shutil
 from os import listdir
 from os.path import isdir
 from PIL import Image
@@ -33,6 +34,9 @@ def load_faces(directory, face_detector):
         face = extract_face(path, face_detector)
         if face is not None:
             faces.append(face)
+
+    shutil.rmtree(directory)
+
     return faces
 
 

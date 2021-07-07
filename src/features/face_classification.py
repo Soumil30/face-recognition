@@ -10,7 +10,6 @@ def train_model(train_x, train_y):
 
     out_encoder = LabelEncoder()
     out_encoder.fit(train_y)
-    dump(out_encoder, '../../data/intermediate/encoder.joblib')
 
     train_y = out_encoder.transform(train_y)
 
@@ -18,4 +17,4 @@ def train_model(train_x, train_y):
 
     model.fit(train_x, train_y)
 
-    return model
+    return model, out_encoder

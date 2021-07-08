@@ -56,3 +56,31 @@ class Employee:
 
         result = cursor.fetchone()
         return result[0]
+
+    def is_present(self, emp_id, date):
+        cursor = self.emp_db.cursor()
+
+        query = "SELECT " + str(date) + " FROM employee WHERE emp_id = " + str(emp_id)
+
+        cursor.execute(query)
+
+        result = cursor.fetchone()
+        return result[0] == 1
+
+    def show_attendance_percentage(self, emp_id):
+        cursor = self.emp_db.cursor()
+
+        query = "SELECT * FROM employee WHERE emp_id = " + str(emp_id)
+
+        cursor.execute(query)
+
+        result = cursor.fetchall()[0]
+
+        count = 0
+        total_columns = len(result)
+        no_of_columns = total_columns - 3
+        for i in range(no_of_columns - 1, total_columns):
+            if result[i] == 1:
+                count = count + 1
+
+        return (count / no_of_columns) * 100

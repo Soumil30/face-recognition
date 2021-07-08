@@ -8,13 +8,10 @@ def unrecognized_face():
     root = Tk()
     root.geometry()
     root.withdraw()
-
-    retry = messagebox.askretrycancel("Unrecognized", "Cannot Recognize Face ! Try again?")
+    messagebox.showinfo("Unrecognized", "Cannot Recognize Face ! Try again !")
 
     root.destroy()
     root.mainloop()
-
-    return retry
 
 
 def undetected_face():
@@ -22,12 +19,10 @@ def undetected_face():
     root.geometry()
     root.withdraw()
 
-    retry = messagebox.askretrycancel("Undetected", "Cannot Detect Face ! Try again?")
+    messagebox.showinfo("Undetected", "Cannot Detect Face ! Try again !")
 
     root.destroy()
     root.mainloop()
-
-    return retry
 
 
 def recognized_face(emp_id):

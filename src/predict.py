@@ -28,7 +28,7 @@ while True:
     ret, frame = vid.read()
     cv2.imshow('frame', frame)
 
-    if cv2.waitKey(1) & 0xFF == ord('s'):
+    if cv2.waitKey(30) & 0xFF == ord('s'):
         image = Image.fromarray(frame, 'RGB')
         pixels = asarray(image)
         cv2.imwrite("../data/raw/emp.jpg", pixels)
@@ -53,22 +53,22 @@ while True:
         embedding_face = in_encoder.transform(embedding_face)
         embedding_face = expand_dims(embedding_face[0], axis=0)
 
-        result_class = classification_model.predict(embedding_face)[0]
+        result_class = classification_model.predict(embedding_face)
         result_prob = classification_model.predict_proba(embedding_face)
 
-        result_class_name = out_encoder.inverse_transform(result_class)[0]
+        result_class_name = out_encoder.inverse_transform(result_class)
 
-        print(result_class, result_prob, result_class_name)
+        print(result_class[0], result_prob, result_class_name[0])
 
-        if result_prob[0, result_class] < 0.6:
+        if result_prob[0, result_class[0]] < 0.65:
             unrecognized_face()
 
         else:
-            recognized_face(result_class_name)
+            recognized_face(result_class_name[0])
 
         os.remove("../data/raw/emp.jpg")
 
-    if cv2.waitKey(1) & 0xFF == ord('q'):
+    if cv2.waitKey(30) & 0xFF == ord('q'):
         break
 
 vid.release()
